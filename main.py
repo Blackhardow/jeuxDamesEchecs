@@ -1,22 +1,27 @@
 import pygame
-from constants import width, height
-from damier import Damier
-from pions import Pion
-
+from constants import WIDTH, HEIGHT, SQUARE_SIZE, RED
+from games import Game
 
 #Initialisation de Pygame
-pygame.init()
+# pygame.init()
 
 
 fps = 60
 
-WINS =  pygame.display.set_mode((width, height))
-pygame.display.set_caption('Jeu de dames')
+WINS =  pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption('Jeu de dame')
+
+def get_row_col_from_mouse(pos):
+    x, y = pos
+    row = y // SQUARE_SIZE
+    col = x // SQUARE_SIZE
+    return row, col
 
 def main(): 
     run = True
     clock = pygame.time.Clock()
-    damier = Damier()
+    game = Game(WINS)
+
  
     while run :
         clock.tick(fps)
@@ -26,10 +31,13 @@ def main():
             
             #Affiche l'écran et met à jour la fenêtre
             if event.type == pygame.MOUSEBUTTONDOWN:
-                pass
+                pos = pygame.mouse.get_pos()
+                row, col = get_row_col_from_mouse(pos)
 
-        damier.draw(WINS)
-        pygame.display.update()
+                if game.turn == RED:
+                    game.select(row, col)
+              
+        game.update()
     
 
     pygame.quit
