@@ -68,12 +68,11 @@ class Damier:
         row = pion.row 
 
         if pion.color == RED or pion.king:
-            move.update(self._traverse_left(row - 1, max(row - 3, -1), - 1, pion.color, left))
-            move.update(self._traverse_right(row - 1, max(row - 3, -1), - 1, pion.color, right))  
+            move.update(self._traverse_left(row - 1, max(row - 4, -1), - 1, pion.color, left))
+            move.update(self._traverse_right(row - 1, max(row - 4, -1), - 1, pion.color, right))  
         if pion.color ==  ABS_WHITE or pion.king:
-            move.update(self._traverse_left(row + 1, min(row + 3, ROWS), 1, pion.color, left))
-            move.update(self._traverse_right(row + 1, min(row + 3), ROWS,  1, pion.color, right))  
-        
+            move.update(self._traverse_left(row + 1, min(row + 2, ROWS), 1, pion.color, left))
+            move.update(self._traverse_right(row + 1, min(row + 2), ROWS),  1, pion.color, right)
         return move  
 
     def _traverse_left(self, start, stop, step, color, left, skipped = []):

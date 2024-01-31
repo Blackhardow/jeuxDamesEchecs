@@ -1,10 +1,9 @@
 import pygame
 from constants import WIDTH, HEIGHT, SQUARE_SIZE, RED
-from games import Game
+from jeu import Jeu
 
 #Initialisation de Pygame
 # pygame.init()
-
 
 fps = 60
 
@@ -20,7 +19,7 @@ def get_row_col_from_mouse(pos):
 def main(): 
     run = True
     clock = pygame.time.Clock()
-    game = Game(WINS)
+    jeu = Jeu(WINS)
 
  
     while run :
@@ -29,15 +28,15 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
             
-            #Affiche l'écran et met à jour la fenêtre
+            #Affiche et met à jour la fenêtre
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()
                 row, col = get_row_col_from_mouse(pos)
 
-                if game.turn == RED:
-                    game.select(row, col)
+                if jeu.turn == RED:
+                    jeu.select(row, col)
               
-        game.update()
+        jeu.update()
     
 
     pygame.quit
